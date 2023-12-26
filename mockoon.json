@@ -1,0 +1,370 @@
+{
+  "uuid": "f706a40b-fb9c-492d-9ae4-c0dfd22e77dc",
+  "lastMigration": 28,
+  "name": "Payrails API Reference",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "1f554fab-a89e-4d1f-b07b-56e5c13acf07",
+      "type": "http",
+      "documentation": "Request an access token",
+      "method": "post",
+      "endpoint": "auth/token/:clientId",
+      "responses": [
+        {
+          "uuid": "c4234e11-d6b7-447b-b21f-9cdf1a8e408d",
+          "body": "{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6ImY1YjE1ODU0LWE3Y2YtNGFmMy1iNjU3LTI2NTJmNWM2YzY3OCIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicGF5cmFpbHMtYmFja2VuZCJdLCJleHAiOjE2OTg1OTYzNjIsImh0dHBzOi8vcGF5cmFpbHMuaW8vY2xhaW1zL2N1c3RvbV9zY29wZSI6IntcImFsbG93c0FsbFwiOnRydWUsXCJ0eXBlXCI6XCJtZXJjaGFudFwifSIsImlzcyI6InBheXJhaWxzIiwia2lkIjoiZjViMTU4NTQtYTdjZi00YWYzLWI2NTctMjY1MmY1YzZjNjc4IiwicGVybWlzc2lvbnMiOlsiYWNjb3VudHM6bGlzdCIsImFjY291bnRzOnJlYWQiLCJhY2NvdW50dHlwZXM6Y3JlYXRlIiwiYW5hbHl0aWNzOnJlYWQiLCJhcGlsb2dzOmxpc3QiLCJhcGlsb2dzOnJlYWQiLCJiaW46cmVhZCIsImNsaWVudHM6bGlzdCIsImNsaWVudHM6cm90YXRlX3NlY3JldCIsImNvbnN1bWVyY2hlY2tvdXQ6cmVhZDpjb25maWciLCJjb25zdW1lcmNoZWNrb3V0OndyaXRlOmNvbmZpZyIsImV4ZWN1dGlvbnM6YXV0aG9yaXplIiwiZXhlY3V0aW9uczpjYW5jZWwiLCJleGVjdXRpb25zOmNhcHR1cmUiLCJleGVjdXRpb25zOmNvbmZpcm0iLCJleGVjdXRpb25zOmNyZWF0ZSIsImV4ZWN1dGlvbnM6bGlzdCIsImV4ZWN1dGlvbnM6bG9va3VwIiwiZXhlY3V0aW9uczpyZWFkIiwiZXhlY3V0aW9uczpyZWZ1bmQiLCJob2xkZXJzOmNyZWF0ZSIsImhvbGRlcnM6bGlzdCIsImhvbGRlcnM6bG9jayIsImhvbGRlcnM6cmVhZCIsImhvbGRlcnM6dW5sb2NrIiwiaW5zdHJ1bWVudHM6Y3JlYXRlIiwiaW5zdHJ1bWVudHM6ZGVsZXRlIiwiaW5zdHJ1bWVudHM6bGlzdCIsImluc3RydW1lbnRzOnJlYWQiLCJpbnN0cnVtZW50czp0b2tlbml6ZSIsImludGVncmF0aW9uczpsaXN0Iiwia2V5czpsaXN0Iiwia2V5czpyb3RhdGUiLCJwYXltZW50bWV0aG9kczpjcmVhdGUiLCJwYXltZW50bWV0aG9kczpsaXN0IiwicGF5bWVudG1ldGhvZHM6cmVhZCIsInBheW1lbnRtZXRob2RzOnVwZGF0ZSIsInBheW1lbnRzOmxpc3QiLCJwYXltZW50czpyZWFkIiwicHJvdmlkZXJzOmNyZWF0ZSIsInByb3ZpZGVyczpsaXN0IiwicHJvdmlkZXJzOnByb3h5IiwicHJvdmlkZXJzOnJlYWQiLCJwcm92aWRlcnM6dXBkYXRlIiwicmF3bm90aWZpY2F0aW9uczpsaXN0Iiwicm9sZXM6bGlzdCIsInJvbGVzOnJlYWQiLCJydWxlc2V0czpjcmVhdGUiLCJydWxlc2V0czpsaXN0IiwicnVsZXNldHM6cmVhZCIsInNkazpyZWFkOmNvbmZpZyIsInN0YXRpc3RpY3M6bGlzdDpwYXltZW50cyIsInRva2VuczpjcmVhdGUiLCJ0b2tlbnM6ZGVsZXRlIiwidG9rZW5zOmxpc3QiLCJ0b2tlbnM6cmVhZCIsInRyYW5zZmVyczpjcmVhdGUiLCJ0cmFuc2ZlcnM6bGlzdCIsInRyYW5zZmVyczpyZWFkIiwidXNlcnM6YmxvY2siLCJ1c2VyczpjcmVhdGUiLCJ1c2VyczpsaXN0IiwidXNlcnM6cmVhZCIsInVzZXJzOnJvbGU6YXNzaWduIiwidXNlcnM6cm9sZTp1bmFzc2lnbiIsInVzZXJzOnVuYmxvY2siLCJ2YXVsdDpyZWFkOmNvbmZpZyIsIndvcmtmbG93czpjcmVhdGUiLCJ3b3JrZmxvd3M6bGlzdCIsIndvcmtmbG93czpyZWFkIiwiZmllbGRzOmNyZWF0ZSIsImZpZWxkczp1cGRhdGUiLCJmaWVsZHM6cmVhZCIsImZpZWxkczpsaXN0Il0sInN1YiI6ImJhY2tlbmQifQ.jzphnYIaMCCQui7JXXStkSSGpXr0nOyyT2FlSD_gI8OB8eSWzCopE91pDu0tq0Q-eNsDrbhfocCj18CDa4ljrAAHyzln-HbGhn2HsGNFgFfpFqvTjke27u9LAPOa-XKjTkyqw1OZJwMCmoaQ1o-VUFoCCb1Po5CrUkg81qYBDvKAmqUXbvfWvgHJGzq7kTVwGxLDcJHwGnj0ZNXSa8hgS-dbxJzxVpY3Kwji8-AFVJK89c_TSJv2NCTgeHOPYbhlXjKIoqW5bGMjNscOFSfHZUvmmijp_4vihu_aZ7qa7zK-BVELyM3h78Uk72g4dvo69w2uN2lSMoHfsNcCxBuOzA\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 3600\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "OK - A successful access token response.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Cache-Control",
+              "value": ""
+            },
+            {
+              "key": "Pragma",
+              "value": ""
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "4c77d2d6-34e3-421c-bc7d-e7b0177347a5",
+          "body": "{\n  \"error\": \"{{oneOf (array 'invalid_request' 'invalid_client' 'invalid_grant' 'unauthorized_client' 'unsupported_grant_type')}}\",\n  \"error_description\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad Request.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "f5ce46fe-3cac-4099-8552-2f07b2cae4ce",
+          "body": "{\n  \"error\": \"{{oneOf (array 'invalid_request' 'invalid_client' 'invalid_grant' 'unauthorized_client' 'unsupported_grant_type')}}\",\n  \"error_description\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "e955254d-caf5-4776-8e43-b282b52d948b",
+      "type": "http",
+      "documentation": "Initialize a client SDK",
+      "method": "post",
+      "endpoint": "merchant/client/init",
+      "responses": [
+        {
+          "uuid": "2164048f-1ed5-4c39-9b2b-a9fa0323a778",
+          "body": "{\n  \"version\": \"1.0.0\",\n  \"data\": \"eyJ0b2tlbiI6ImV5SmhiR2NpT2lKU1V6STFOaUlzSW10cFpDSTZJbU5tT0RGak5USmxMVGN6WVRBdE5EQTBNQzA1WTJWaUxXRXdOMk16WVdZNE5qUm1PU0lzSW5SNWNDSTZJa3BYVkNKOS5leUpoZFdRaU9sc2ljR0Y1Y21GcGJITXRZbUZqYTJWdVpDSmRMQ0psZUhBaU9qRTJPVGcxT1RZd05qVXNJbWgwZEhCek9pOHZjR0Y1Y21GcGJITXVhVzh2WTJ4aGFXMXpMMk4xYzNSdmJWOXpZMjl3WlNJNkludGNJbUZzYkc5M2MwRnNiRndpT21aaGJITmxMRndpWlhobFkzVjBhVzl1U1dSY0lqcGNJbHdpTEZ3aWFHOXNaR1Z5VW1WbVpYSmxibU5sWENJNlhDSlFZWGx5WVdsc2N5QlFjbTlrZFdOMElHRnpjMlZ6YzIxbGJuUmNJaXhjSW5SdmEyVnVhWHBoZEdsdmJrbGtYQ0k2WENJNVltWTBaRGMxWmkwek16UTRMVFJoTkRVdE9ERTRNQzFqTlRobFpqazRNRGN6TlRWY0lpeGNJblI1Y0dWY0lqcGNJbU5zYVdWdWRGd2lmU0lzSW1semN5STZJbkJoZVhKaGFXeHpJaXdpYTJsa0lqb2lZMlk0TVdNMU1tVXROek5oTUMwME1EUXdMVGxqWldJdFlUQTNZek5oWmpnMk5HWTVJaXdpY0dWeWJXbHpjMmx2Ym5NaU9sc2lZMnhwWlc1ME9tVjRaV04xZEdsdmJuTTZZWFYwYUc5eWFYcGxJaXdpWTJ4cFpXNTBPbVY0WldOMWRHbHZibk02WTI5dVptbHliU0lzSW1Oc2FXVnVkRHBsZUdWamRYUnBiMjV6T25KbFlXUWlMQ0pqYkdsbGJuUTZhVzV6ZEhKMWJXVnVkSE02WTNKbFlYUmxJaXdpWTJ4cFpXNTBPbWx1YzNSeWRXMWxiblJ6T25SdmEyVnVhWHBsSWwwc0luTjFZaUk2SW0xbGNtTm9ZVzUwTFhOa2F5SjkuZ2VWTmxRdHU2OE1jc21ZemI3WGFRX2lRcnB2T0JVTmJzRVJVYjl3M09EOXJfMGZ2M0M0OEkxSExCQjkwekRKSkgxanRkRmo4a1lFUFdVNFZ5LVRER1lqZTcwWk5CUG1iZ3k4RDVIRWpONVRKeTl3SVdrMXpsbEl4TnVGNlE3MHF3dklUSWNYWnBwWHQ2blhKNWVTZE5pQU5UdTVRLXpuQkhIX3FmcHRPRTRfaWt1ZExCRThfZzVkUHBnZEFRcFF0am4yOV80OXhVMG1qZENHV2l0bXNvSHYyZXE1bnNmMjdHWkFRUERoZlFUT1RhckJPWThYb1h0MEQ3MlplNGpPaUx2SUFLek5BQ3lwZVVTZkNhd2tleWt4Q3h3SWxVQmxBY3hUUVRjWTRha05NTDRfcF90UUx5M3dCME9TXzlGbnYtQU1OSy0wb0I4bHhLSXRiNGZpNUdnIiwiaG9sZGVyUmVmZXJlbmNlIjoiUGF5cmFpbHMgUHJvZHVjdCBhc3Nlc3NtZW50IiwidG9rZW5pemF0aW9uIjp7ImlkIjoiOWJmNGQ3NWYtMzM0OC00YTQ1LTgxODAtYzU4ZWY5ODA3MzU1IiwicHVibGljS2V5IjoiTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUEza09NOGZUWGE3b01kWXhHQ2E5dThaNnltMkxkY3p0Mng3a0FtSEtWOWpUOFlHN1BhR3h2NEU1blJqWm5UOU9VMGZaWkFHVUduZzFSRHJSYUNGd2NacE9ENW01NnNHMUxhWVE4ZGtheFNHMk0xQnluTGVLOVhSaVpFbXgxSmhEMFBrNG1tNXNJRklnM09hNDg2Q1dNVnJqZ0Nwc0YxVklnVDd5R29OT2s4dGRPcVBaMjA2QVRYZCs1QnhBclEzYXVwOXppRDBuc2s2NkNSY2hYVkNnRjdHYy95U0VzYytCM0doRjRxcUZTdlpiQUo0aEcxdWMxLzhHMlhiS29KSWRwZ2M0UWF2bnZ0QURBVEpCbXF5SGlvNzBkczc2Z1FKQU1zOHVNcGdOOUZPcVlxajVYU0VYOUsvV2JIUUJucWpCb3ByWlBuZ3E4aHpIdWtieDhYaHFyZlFJREFRQUIiLCJsaW5rcyI6eyJ0b2tlbml6ZSI6eyJtZXRob2QiOiJQT1NUIiwiaHJlZiI6Imh0dHBzOi8vcGF5cmFpbHMtYXBpLXB1Yi5zdGFnaW5nLnBheXJhaWxzLmlvL3B1YmxpYy9wYXltZW50L2luc3RydW1lbnRzL3Rva2VuaXplIn19fX0\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Configurations to initialize Payrails SDK on your client.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "f878fd51-f428-423a-ac5c-097e2c272608",
+          "body": "{\n  \"errors\": [\n    {\n      \"id\": \"{{faker 'datatype.uuid'}}\",\n      \"title\": \"\",\n      \"detail\": \"\",\n      \"meta\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad Request.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "c9313c72-f9a9-4497-afa9-1628336bf3ec",
+          "body": "{\n  \"errors\": [\n    {\n      \"id\": \"{{faker 'datatype.uuid'}}\",\n      \"title\": \"\",\n      \"detail\": \"\",\n      \"meta\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "2aebf7e3-5185-4abe-a930-cad5ba3983c0",
+          "body": "{\n  \"errors\": [\n    {\n      \"id\": \"{{faker 'datatype.uuid'}}\",\n      \"title\": \"\",\n      \"detail\": \"\",\n      \"meta\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Not Found.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "2c9b1581-c4c4-4473-8a07-dd2ef7d2090e",
+      "type": "http",
+      "documentation": "Tokenize an instrument",
+      "method": "post",
+      "endpoint": "public/payment/instruments/tokenize",
+      "responses": [
+        {
+          "uuid": "e465c671-cdf1-4fb1-b63c-e188cd94df65",
+          "body": "{\n  \"id\": \"{{faker 'datatype.uuid'}}\",\n  \"createdAt\": \"{{faker 'date.recent' 365}}\",\n  \"updatedAt\": \"{{faker 'date.recent' 365}}\",\n  \"holderId\": \"{{faker 'datatype.uuid'}}\",\n  \"status\": \"created\"\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Tokenized.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "e50b97d7-d5fa-447d-9fb1-800e3e78270b",
+          "body": "{\n  \"id\": \"b8fe6271-5d71-4d28-b8e8-89e64acc0c49\",\n  \"holderId\": \"788c7c09-a490-4603-915a-e2a957a6cca1\",\n  \"createdAt\": \"2022-04-22T17:53:36.814Z\",\n  \"updatedAt\": \"2022-04-22T17:53:36.814Z\",\n  \"paymentMethod\": \"card\",\n  \"description\": \"Personal card.\",\n  \"fingerprint\": \"739abff0-406a-4d32-8cfb-701e12be5848\",\n  \"status\": \"created\",\n  \"futureUsage\": \"CardOnFile\",\n  \"data\": {\n    \"network\": \"visa\",\n    \"bin\": \"411111\",\n    \"suffix\": \"1111\",\n    \"expiryMonth\": \"10\",\n    \"expiryYear\": \"2026\",\n    \"holderName\": \"John Doe\"\n  },\n  \"tokens\": [\n    {\n      \"id\": \"5671c2cc-32c4-437d-a830-c449db87c542\",\n      \"createdAt\": \"2022-04-22T17:53:36.814Z\",\n      \"updatedAt\": \"2022-04-22T17:53:36.814Z\",\n      \"instrumentId\": \"b8fe6271-5d71-4d28-b8e8-89e64acc0c49\",\n      \"status\": \"created\",\n      \"type\": \"network\",\n      \"providerId\": \"e0ba44eb-1d54-4317-823b-d2f9419d3b9d\",\n      \"providerConfigId\": \"69e0aac4-2939-427e-aa37-d79e4989219c\",\n      \"reference\": \"token-in-the-provider\",\n      \"meta\": {\n        \"securityCodeExpireAt\": \"2023-08-06T09:16:10.011Z\"\n      }\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "card",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "6b0fc09b-09e1-4393-b9fb-a9878b195624",
+          "body": "{\n  \"errors\": [\n    {\n      \"id\": \"{{faker 'datatype.uuid'}}\",\n      \"title\": \"\",\n      \"detail\": \"\",\n      \"meta\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Bad Request.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "f43a3c72-90cc-497d-96f9-8eb7c84f782c",
+          "body": "{\n  \"errors\": [\n    {\n      \"id\": \"{{faker 'datatype.uuid'}}\",\n      \"title\": \"\",\n      \"detail\": \"\",\n      \"meta\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "71c2a4bf-55b4-4d9f-8b25-e0f7a2c0ad54",
+          "body": "{\n  \"errors\": [\n    {\n      \"id\": \"{{faker 'datatype.uuid'}}\",\n      \"title\": \"\",\n      \"detail\": \"\",\n      \"meta\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "Not Found.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "1f554fab-a89e-4d1f-b07b-56e5c13acf07"
+    },
+    {
+      "type": "route",
+      "uuid": "e955254d-caf5-4776-8e43-b282b52d948b"
+    },
+    {
+      "type": "route",
+      "uuid": "2c9b1581-c4c4-4473-8a07-dd2ef7d2090e"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}

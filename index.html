@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Card Tokenization</title>
+  </head>
+  <body>
+    <h2>Payment Information</h2>
+    <!-- Form to collect payment data -->
+    <form id="cardForm">
+      <label for="cardNumber">Card Number:</label>
+      <input
+        type="text"
+        id="cardNumber"
+        name="cardNumber"
+        placeholder="Enter card number"
+        required
+      /><br /><br />
+
+      <label for="expiryMonth">Expiry Month:</label>
+      <input
+        type="text"
+        id="expiryMonth"
+        name="expiryMonth"
+        placeholder="MM"
+        required
+      /><br /><br />
+
+      <label for="expiryYear">Expiry Year:</label>
+      <input
+        type="text"
+        id="expiryYear"
+        name="expiryYear"
+        placeholder="YY"
+        required
+      /><br /><br />
+
+      <label for="securityCode">Security Code:</label>
+      <input
+        type="text"
+        id="securityCode"
+        name="securityCode"
+        placeholder="CVV"
+        required
+      /><br /><br />
+
+      <label for="holderName">Holder Name:</label>
+      <input
+        type="text"
+        id="holderName"
+        name="holderName"
+        placeholder="Full Name"
+        required
+      /><br /><br />
+
+      <button type="submit">Tokenize Card</button>
+    </form>
+
+    <!-- I show tokenization results here -->
+    <div id="tokenizationResponse"></div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
