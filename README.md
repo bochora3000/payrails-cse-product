@@ -8,10 +8,7 @@ The goal of the challenge was to create an application for tokenizing cards via 
 
 ## Solution
 
-Access token retrievela and client initialization are happening on server side (app.js)
-Encryption is happening on client side (scrip.jt)
-Finally tokenization is happening via proxy enpoint on app.js server side.
-Client processes tokenization response and updates DOM for demonstration purposes.
+Access token retrieval and client initialization happen on the server-side (`app.js`). Encryption occurs on the client-side (`script.js`). Finally, tokenization occurs via a proxy endpoint on `app.js` server-side. The client processes the tokenization response and updates the DOM for demonstration purposes.
 
 ## Table of Contents
 
@@ -25,7 +22,7 @@ Client processes tokenization response and updates DOM for demonstration purpose
 
 To test the solution, you'll need:
 
-- **Mockcoon** running locally. Refer to the [instructions here](https://github.com/bochora3000/payrails-product-assessment?tab=readme-ov-file#mockoon) to set it up.
+- **Mockoon** running locally. Refer to the [instructions here](https://github.com/bochora3000/payrails-product-assessment?tab=readme-ov-file#mockoon) to set it up.
 
 ## Installation
 
@@ -45,7 +42,7 @@ To test the solution, you'll need:
 
 ### GET `/client-configurations`
 
-- **Purpose:** Fetches client configurations including access tokens and client settings.
+- **Purpose:** Fetches client configurations, including access tokens and client settings.
 - **Method:** GET
 - **Endpoint:** `http://localhost:3000/client-configurations`
 - **Response:** JSON object containing client configurations.
