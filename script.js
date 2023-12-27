@@ -45,53 +45,23 @@ async function parsePublicKey(publicKey) {
 }
 
 // Function to encrypt payment data with a public key using JWE
-async function encryptPaymentData(publicKey, cardData) {
+async function encryptPaymentData(publicKeyCryptoKey, cardData) {
   try {
     const jsonData = JSON.stringify(cardData);
 
     // Convert card data to ArrayBuffer
     const encodedData = new TextEncoder().encode(jsonData);
 
-    // Encrypt using RSA-OAEP-256 for key encryption and A256CBC-HS512 for content encryption
-    const encryptedKey = await crypto.subtle.generateKey(
-      {
-        name: "AES-GCM",
-        length: 256,
-      },
-      true,
-      ["encrypt"]
-    );
-
-    const algorithm = {
-      name: "RSA-OAEP-256",
-      hash: { name: "SHA-256" },
-    };
-
+    // Encrypt using the parsed public key (publicKeyCryptoKey) with RSA-OAEP-256
     const encryptedData = await crypto.subtle.encrypt(
       {
-        name: "AES-GCM",
-        iv: crypto.getRandomValues(new Uint8Array(12)),
+        name: "RSA-OAEP",
       },
-      encryptedKey,
+      publicKeyCryptoKey,
       encodedData
     );
 
-    const jweHeader = {
-      alg: "RSA-OAEP-256",
-      enc: "A256CBC-HS512",
-    };
-
-    const jwe = {
-      ciphertext: arrayBufferToBase64(encryptedData),
-      iv: arrayBufferToBase64(algorithm.iv),
-      header: jweHeader,
-      encrypted_key: arrayBufferToBase64(
-        await crypto.subtle.exportKey("raw", encryptedKey)
-      ),
-      tag: "",
-    };
-
-    return JSON.stringify(jwe); // Return the JWE string
+    return arrayBufferToBase64(encryptedData); // Return the Base64-encoded encrypted data
   } catch (error) {
     console.error("Encryption error:", error);
     throw error;
