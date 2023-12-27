@@ -57,7 +57,8 @@ async function encryptPaymentData(publicKeyCryptoKey, cardData) {
       encodedData
     );
 
-    return arrayBufferToBase64(encryptedData);
+    // Convert ArrayBuffer to Base64 directly here
+    return btoa(String.fromCharCode(...new Uint8Array(encryptedData)));
   } catch (error) {
     console.error("Encryption error:", error);
     throw error;
@@ -85,7 +86,18 @@ async function tokenizeInstrument(base64Encoded, configData, token) {
       body: JSON.stringify(payload),
     });
     const tokenizationData = await response.json();
-    displayTokenizationResponse(tokenizationData);
+
+    // Display tokenization response directly within the function
+    const tokenizationResponseHtml = `
+      <p>ID: ${tokenizationData.id}</p>
+      <p>Created At: ${tokenizationData.createdAt}</p>
+      <p>Updated At: ${tokenizationData.updatedAt}</p>
+      <p>Holder ID: ${tokenizationData.holderId}</p>
+      <p>Status: ${tokenizationData.status}</p>
+    `;
+    const responseContainer = document.getElementById("tokenizationResponse");
+    responseContainer.innerHTML = tokenizationResponseHtml;
+
     console.log(tokenizationData);
   } catch (error) {
     console.error("Tokenization error:", error);
@@ -100,7 +112,17 @@ document
     event.preventDefault();
     try {
       const configData = await fetchConfigurations();
-      const cardData = gatherCardData(configData);
+
+      // Gather card data directly within the submission function
+      const cardData = {
+        cardNumber: document.getElementById("cardNumber").value,
+        expiryMonth: document.getElementById("expiryMonth").value,
+        expiryYear: document.getElementById("expiryYear").value,
+        securityCode: document.getElementById("securityCode").value,
+        holderName: document.getElementById("holderName").value,
+        holderReference: configData.holderReference,
+      };
+
       const parsedKey = await parsePublicKey(configData.tokenization.publicKey);
       const base64Encoded = await encryptPaymentData(parsedKey, cardData);
       await tokenizeInstrument(base64Encoded, configData, configData.token);
@@ -108,33 +130,3 @@ document
       console.error("Submission error:", error);
     }
   });
-
-// Helper function to convert ArrayBuffer to Base64
-function arrayBufferToBase64(arrayBuffer) {
-  return btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
-}
-
-// Function to gather card data for submission
-function gatherCardData(configData) {
-  return {
-    cardNumber: document.getElementById("cardNumber").value,
-    expiryMonth: document.getElementById("expiryMonth").value,
-    expiryYear: document.getElementById("expiryYear").value,
-    securityCode: document.getElementById("securityCode").value,
-    holderName: document.getElementById("holderName").value,
-    holderReference: configData.holderReference,
-  };
-}
-
-// Function to display tokenization response
-function displayTokenizationResponse(tokenizationData) {
-  const tokenizationResponseHtml = `
-    <p>ID: ${tokenizationData.id}</p>
-    <p>Created At: ${tokenizationData.createdAt}</p>
-    <p>Updated At: ${tokenizationData.updatedAt}</p>
-    <p>Holder ID: ${tokenizationData.holderId}</p>
-    <p>Status: ${tokenizationData.status}</p>
-  `;
-  const responseContainer = document.getElementById("tokenizationResponse");
-  responseContainer.innerHTML = tokenizationResponseHtml;
-}
