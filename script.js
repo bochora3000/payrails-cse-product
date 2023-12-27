@@ -48,11 +48,7 @@ async function parsePublicKey(publicKey) {
 async function encryptPaymentData(publicKeyCryptoKey, cardData) {
   try {
     const jsonData = JSON.stringify(cardData);
-
-    // Convert card data to ArrayBuffer
     const encodedData = new TextEncoder().encode(jsonData);
-
-    // Encrypt using the parsed public key (publicKeyCryptoKey) with RSA-OAEP-256
     const encryptedData = await crypto.subtle.encrypt(
       {
         name: "RSA-OAEP",
@@ -61,7 +57,7 @@ async function encryptPaymentData(publicKeyCryptoKey, cardData) {
       encodedData
     );
 
-    return arrayBufferToBase64(encryptedData); // Return the Base64-encoded encrypted data
+    return arrayBufferToBase64(encryptedData);
   } catch (error) {
     console.error("Encryption error:", error);
     throw error;
@@ -72,39 +68,24 @@ async function encryptPaymentData(publicKeyCryptoKey, cardData) {
 async function tokenizeInstrument(base64Encoded, configData, token) {
   try {
     const url = "http://localhost:3000/tokenize";
-
     const payload = {
       storeInstrument: true,
       holderReference: configData.holderReference,
       encryptedInstrumentDetails: base64Encoded,
       futureUsage: "CardOnFile",
     };
-
     const headers = {
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
       "Content-Type": "application/json",
     };
-
     const response = await fetch(url, {
       method: "POST",
       headers: headers,
       body: JSON.stringify(payload),
     });
-
     const tokenizationData = await response.json();
-
-    const tokenizationResponseHtml = `
-      <p>ID: ${tokenizationData.id}</p>
-      <p>Created At: ${tokenizationData.createdAt}</p>
-      <p>Updated At: ${tokenizationData.updatedAt}</p>
-      <p>Holder ID: ${tokenizationData.holderId}</p>
-      <p>Status: ${tokenizationData.status}</p>
-    `;
-
-    const responseContainer = document.getElementById("tokenizationResponse");
-    responseContainer.innerHTML = tokenizationResponseHtml;
-
+    displayTokenizationResponse(tokenizationData);
     console.log(tokenizationData);
   } catch (error) {
     console.error("Tokenization error:", error);
@@ -117,25 +98,12 @@ document
   .getElementById("cardForm")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
-
     try {
       const configData = await fetchConfigurations();
-
-      const cardData = {
-        cardNumber: document.getElementById("cardNumber").value,
-        expiryMonth: document.getElementById("expiryMonth").value,
-        expiryYear: document.getElementById("expiryYear").value,
-        securityCode: document.getElementById("securityCode").value,
-        holderName: document.getElementById("holderName").value,
-        holderReference: configData.holderReference,
-      };
-
-      const publicKey = configData.tokenization.publicKey;
-      const token = configData.token;
-
-      const parsedKey = await parsePublicKey(publicKey);
+      const cardData = gatherCardData(configData);
+      const parsedKey = await parsePublicKey(configData.tokenization.publicKey);
       const base64Encoded = await encryptPaymentData(parsedKey, cardData);
-      await tokenizeInstrument(base64Encoded, configData, token);
+      await tokenizeInstrument(base64Encoded, configData, configData.token);
     } catch (error) {
       console.error("Submission error:", error);
     }
@@ -144,4 +112,29 @@ document
 // Helper function to convert ArrayBuffer to Base64
 function arrayBufferToBase64(arrayBuffer) {
   return btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+}
+
+// Function to gather card data for submission
+function gatherCardData(configData) {
+  return {
+    cardNumber: document.getElementById("cardNumber").value,
+    expiryMonth: document.getElementById("expiryMonth").value,
+    expiryYear: document.getElementById("expiryYear").value,
+    securityCode: document.getElementById("securityCode").value,
+    holderName: document.getElementById("holderName").value,
+    holderReference: configData.holderReference,
+  };
+}
+
+// Function to display tokenization response
+function displayTokenizationResponse(tokenizationData) {
+  const tokenizationResponseHtml = `
+    <p>ID: ${tokenizationData.id}</p>
+    <p>Created At: ${tokenizationData.createdAt}</p>
+    <p>Updated At: ${tokenizationData.updatedAt}</p>
+    <p>Holder ID: ${tokenizationData.holderId}</p>
+    <p>Status: ${tokenizationData.status}</p>
+  `;
+  const responseContainer = document.getElementById("tokenizationResponse");
+  responseContainer.innerHTML = tokenizationResponseHtml;
 }
