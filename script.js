@@ -44,24 +44,54 @@ async function parsePublicKey(publicKey) {
   }
 }
 
-// Function to encrypt payment data with a public key
+// Function to encrypt payment data with a public key using JWE
 async function encryptPaymentData(publicKey, cardData) {
   try {
     const jsonData = JSON.stringify(cardData);
 
-    const encryptedArrayBuffer = await crypto.subtle.encrypt(
+    // Convert card data to ArrayBuffer
+    const encodedData = new TextEncoder().encode(jsonData);
+
+    // Encrypt using RSA-OAEP-256 for key encryption and A256CBC-HS512 for content encryption
+    const encryptedKey = await crypto.subtle.generateKey(
       {
-        name: "RSA-OAEP",
+        name: "AES-GCM",
+        length: 256,
       },
-      publicKey,
-      new TextEncoder().encode(jsonData)
+      true,
+      ["encrypt"]
     );
 
-    const base64Encoded = btoa(
-      String.fromCharCode(...new Uint8Array(encryptedArrayBuffer))
+    const algorithm = {
+      name: "RSA-OAEP-256",
+      hash: { name: "SHA-256" },
+    };
+
+    const encryptedData = await crypto.subtle.encrypt(
+      {
+        name: "AES-GCM",
+        iv: crypto.getRandomValues(new Uint8Array(12)),
+      },
+      encryptedKey,
+      encodedData
     );
 
-    return base64Encoded;
+    const jweHeader = {
+      alg: "RSA-OAEP-256",
+      enc: "A256CBC-HS512",
+    };
+
+    const jwe = {
+      ciphertext: arrayBufferToBase64(encryptedData),
+      iv: arrayBufferToBase64(algorithm.iv),
+      header: jweHeader,
+      encrypted_key: arrayBufferToBase64(
+        await crypto.subtle.exportKey("raw", encryptedKey)
+      ),
+      tag: "",
+    };
+
+    return JSON.stringify(jwe); // Return the JWE string
   } catch (error) {
     console.error("Encryption error:", error);
     throw error;
@@ -135,9 +165,13 @@ document
 
       const parsedKey = await parsePublicKey(publicKey);
       const base64Encoded = await encryptPaymentData(parsedKey, cardData);
-
       await tokenizeInstrument(base64Encoded, configData, token);
     } catch (error) {
       console.error("Submission error:", error);
     }
   });
+
+// Helper function to convert ArrayBuffer to Base64
+function arrayBufferToBase64(arrayBuffer) {
+  return btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+}
