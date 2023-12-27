@@ -10,6 +10,14 @@ The goal of the challenge was to create an application for tokenizing cards via 
 
 Access token retrieval and client initialization happen on the server-side (`app.js`). Encryption occurs on the client-side (`script.js`). Finally, tokenization occurs via a proxy endpoint on `app.js` server-side. The client processes the tokenization response and updates the DOM for demonstration purposes.
 
+**Note #1: Encryption Approach**
+
+In the challenge requirement, the specified encryption involved a PKCS8 RSA public key in `PEM` format without headers and line breaks, using RSA-OAEP-256 and A256CBC-HS512 for content encryption. However, this solution deviates from the requirement by implementing encryption using `CryptoKey`. The `script.js` code converts the publicKey to `CryptoKey` and utilizes the `crypto.subtle` library to encrypt payment data with the public key using RSA-OAEP algorithm. Finally, the data is encoded as a base64Encoded string before being sent for tokenization.
+
+**Note #2: CORS Issue Resolution**
+
+There were issues encountered with CORS settings between the Mockoon server and the client. Instead of making a direct POST to Mockoon, the application utilizes `app.js` as a proxy server to facilitate communication and resolve the CORS problem.
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -17,6 +25,7 @@ Access token retrieval and client initialization happen on the server-side (`app
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Configuration](#configuration)
+- [Notes](#notes)
 
 ## Prerequisites
 
@@ -62,3 +71,5 @@ Ensure you have the following environment variables set in the `.env` file:
 - `CLIENT_ID`: Your client ID for authentication (use whatever is required from the documentation of the endpoint).
 - `API_KEY`: Your API key for authorization (use whatever is required from the documentation of the endpoint).
 - `X_IDEMPOTENCY_KEY`: Key for ensuring idempotent requests (can be anything).
+
+## Notes
