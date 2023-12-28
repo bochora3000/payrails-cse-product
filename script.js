@@ -19,13 +19,17 @@ async function fetchConfigurations() {
 // Function to parse the public key and convert it to CryptoKey
 async function parsePublicKey(publicKey) {
   try {
+    // Decode publickey to binary string
     const binaryDerString = atob(publicKey);
+    // Create unitarray length of binary string
     const binaryDer = new Uint8Array(binaryDerString.length);
 
+    // convert binary string into sequence of bytes
     for (let i = 0; i < binaryDerString.length; ++i) {
       binaryDer[i] = binaryDerString.charCodeAt(i);
     }
 
+    // import binary data into cryptokey, spki is key format and specifies parameters algo, hash and the usage of the key
     const publicKeyCryptoKey = await crypto.subtle.importKey(
       "spki",
       binaryDer,
@@ -37,6 +41,7 @@ async function parsePublicKey(publicKey) {
       ["encrypt"]
     );
 
+    // returns CryptoKey
     return publicKeyCryptoKey;
   } catch (error) {
     console.error("Public key parsing error:", error);
@@ -47,8 +52,11 @@ async function parsePublicKey(publicKey) {
 // Function to encrypt payment data with a public key using JWE
 async function encryptPaymentData(publicKeyCryptoKey, cardData) {
   try {
+    // Payment data as string
     const jsonData = JSON.stringify(cardData);
+    // Encode json string to byte sequence
     const encodedData = new TextEncoder().encode(jsonData);
+    // Performing encryption with RSA-OAEP algo, public key and encodedData
     const encryptedData = await crypto.subtle.encrypt(
       {
         name: "RSA-OAEP",
@@ -57,7 +65,7 @@ async function encryptPaymentData(publicKeyCryptoKey, cardData) {
       encodedData
     );
 
-    // Convert ArrayBuffer to Base64 directly here
+    // Convert encrypted data which is ArrayBuffer to Base64 string directly here. Return results.
     return btoa(String.fromCharCode(...new Uint8Array(encryptedData)));
   } catch (error) {
     console.error("Encryption error:", error);
@@ -66,6 +74,7 @@ async function encryptPaymentData(publicKeyCryptoKey, cardData) {
 }
 
 // Function to tokenize instrument with encrypted details
+
 async function tokenizeInstrument(base64Encoded, configData, token) {
   try {
     const url = "http://localhost:3000/tokenize";
@@ -80,6 +89,7 @@ async function tokenizeInstrument(base64Encoded, configData, token) {
       Accept: "application/json",
       "Content-Type": "application/json",
     };
+    // I'm fetching tokenization data via url and correct parameters
     const response = await fetch(url, {
       method: "POST",
       headers: headers,
@@ -87,7 +97,7 @@ async function tokenizeInstrument(base64Encoded, configData, token) {
     });
     const tokenizationData = await response.json();
 
-    // Display tokenization response directly within the function
+    // Display tokenization response directly within the function. this html will be inserted into DOM.
     const tokenizationResponseHtml = `
       <p>ID: ${tokenizationData.id}</p>
       <p>Created At: ${tokenizationData.createdAt}</p>
@@ -95,6 +105,7 @@ async function tokenizeInstrument(base64Encoded, configData, token) {
       <p>Holder ID: ${tokenizationData.holderId}</p>
       <p>Status: ${tokenizationData.status}</p>
     `;
+    // Insert reponse into HTML
     const responseContainer = document.getElementById("tokenizationResponse");
     responseContainer.innerHTML = tokenizationResponseHtml;
 
@@ -123,8 +134,11 @@ document
         holderReference: configData.holderReference,
       };
 
+      // Prepare publicKey for encryption - store it in parsedKey
       const parsedKey = await parsePublicKey(configData.tokenization.publicKey);
+      // Encryption of payment data with public key - store results in base64econded
       const base64Encoded = await encryptPaymentData(parsedKey, cardData);
+      // After we have encrypted data ready, we can tokenize an instrument. Passing encoded data, configdata - to pass holderreference and token
       await tokenizeInstrument(base64Encoded, configData, configData.token);
     } catch (error) {
       console.error("Submission error:", error);

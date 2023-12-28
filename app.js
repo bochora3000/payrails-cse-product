@@ -24,6 +24,7 @@ app.use(express.json());
 // Handle client configuration request
 app.get("/client-configurations", async (req, res) => {
   try {
+    // 1st - retrieve access data to initialize the client
     const CLIENT_ID = process.env.CLIENT_ID;
     const API_KEY = process.env.API_KEY;
 
@@ -32,9 +33,12 @@ app.get("/client-configurations", async (req, res) => {
       accept: "application/json",
       "x-api-key": API_KEY,
     };
+
+    // request to get token and store it
     const response = await axios.post(url, null, { headers });
     const access_token = response.data.access_token;
 
+    // 2nd - I request client initialization data
     const clientInitUrl = "http://localhost:3001/merchant/client/init";
     const clientHeaders = {
       accept: "application/json",
@@ -43,16 +47,23 @@ app.get("/client-configurations", async (req, res) => {
     };
     const clientRequestBody = {
       type: "tokenization",
-      holderReference: "some customer reference",
+      holderReference: "customer123",
     };
+
+    // Here i make request to client init and store response data
     const clientResponse = await axios.post(clientInitUrl, clientRequestBody, {
       headers: clientHeaders,
     });
 
+    // Data that i receive is encoded and needs to be decoded
     const base64Data = clientResponse.data.data;
+    console.log(base64Data);
+    // I decode base64 data and convert it to the string using utf-8
     const decodedData = Buffer.from(base64Data, "base64").toString("utf-8");
+    // Finally i convert it to JSON so i can send it to my client
     const clientConfigurations = JSON.parse(decodedData);
 
+    // Send it back to client
     res.json(clientConfigurations);
   } catch (error) {
     console.error("Error fetching client configurations:", error);
@@ -63,6 +74,7 @@ app.get("/client-configurations", async (req, res) => {
 // Route to act as a proxy for tokenization
 app.post("/tokenize", async (req, res) => {
   try {
+    // Here happens tokenization
     const url = "http://localhost:3001/public/payment/instruments/tokenize";
     const response = await axios.post(url, req.body);
     res.json(response.data);
@@ -73,7 +85,6 @@ app.post("/tokenize", async (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(3000, () => {
+  console.log(`Server running on port 3000`);
 });
